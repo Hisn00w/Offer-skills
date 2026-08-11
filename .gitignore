@@ -1,0 +1,9 @@
+# 本地与隐私文件
+*.docx
+*.pdf
+outputs/
+work/
+
+# 系统文件
+.DS_Store
+Thumbs.db
