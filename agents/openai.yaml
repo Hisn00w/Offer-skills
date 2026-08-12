@@ -1,4 +1,4 @@
 interface:
   display_name: "Offer Skills"
-  short_description: "Create editable one- or two-page resume HTML and PDF"
-  default_prompt: "Use $Offer-skills to create an editable, privacy-safe resume HTML and PDF."
+  short_description: "Create resume HTML and monitor application progress"
+  default_prompt: "Use $Offer-skills to create an editable resume, application tracker, or daily email monitor."

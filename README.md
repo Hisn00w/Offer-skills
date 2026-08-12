@@ -9,7 +9,7 @@
 - 接收用户上传的简历截图或设计参考图，分析栏位、间距、字体层级、颜色和单双页结构，再生成可编辑 HTML。
 - HTML 正文使用真实文本，不使用截图代替文字，不需要 Word，也不依赖服务器。
 - 浏览器内支持文字编辑、照片替换、字体、文字颜色、加粗和导出 PDF。
-- 模板和示例信息均使用虚构内容，不包含用户隐私。
+- 内置秋招投递进度记录 HTML，可记录日期、公司、岗位、进度、下一步和备注，并支持筛选、统计、CSV/JSON 备份和 PDF 打印。
 
 ## 使用方式
 
@@ -28,6 +28,26 @@
 > 请复刻这张图片的简历版式，保留它的栏位、间距、字体层级、颜色和单双页结构，但最终输出必须是可编辑的 HTML 文本。
 
 AI 会把图片作为视觉参考，而不是把图片直接放进简历正文。复刻后的文字、标题、时间、项目和技能仍然可以在浏览器中编辑。
+
+### 方式三：记录秋招投递进度
+
+使用 `Offer-skills` 的投递进度功能时，AI 会把 `assets/application-tracker.html` 放到桌面并告诉你保存路径。用浏览器打开即可使用。你可以把邮件、招聘网站或手机截图发给 AI，让 AI 按照截图中的信息整理为记录；也可以直接在浏览器中新增和编辑。
+
+进度表支持：
+
+- 日期、公司、岗位、进度、下一步和备注。
+- 搜索、按进度筛选、投递总数/进行中/Offer/已拒绝/本月投递统计。
+- 浏览器本地自动保存，不依赖服务器。
+- 导出 CSV、备份/导入 JSON，以及打印或保存为 PDF。
+
+![秋招投递进度 HTML 预览](assets/application-tracker-overview.svg)
+
+### 方式四：让 AI 查询邮箱通知
+
+告诉 AI 你使用的邮箱类型（例如 Gmail、Outlook、QQ 邮箱、163 邮箱或学校邮箱）以及要登录的邮箱地址。AI 可以使用浏览器查看招聘相关邮件，把新的投递、测评、筛选、面试、拒信或 Offer 更新到桌面的投递进度 HTML 中。
+
+如果邮箱尚未登录，AI 会让你在浏览器中完成登录验证。完成后，告诉 AI“每天检查一次投递邮箱”，AI 可以创建每日定时任务；也可以指定每天的检查时间。定时检查有新进度时更新 HTML，没有变化时反馈“无新增进度”。
+
 
 ## 浏览器编辑与导出
 
@@ -74,11 +94,15 @@ Offer-skills/
 ├── README.md
 ├── SKILL.md
 ├── agents/openai.yaml
+├── references/
+│   └── email-monitoring.md
 └── assets/
     ├── fictional-resume-photo.png
     ├── resume-data-template.json
     ├── resume-template-editable.html
     ├── resume-template-two-page.html
+    ├── application-tracker.html
+    ├── application-tracker-overview.svg
     ├── template-overview.jpg
     └── templates-html/
         ├── 01-大厂极简简历模板.html
@@ -88,16 +112,12 @@ Offer-skills/
 
 所有编号模板都是 HTML 文件；正文、标题、时间、项目和技能为可编辑文本。模板只引用 `assets/fictional-resume-photo.png` 这一张虚构示例照片。
 
-## 隐私边界
-
-- 不要把真实姓名、电话、邮箱、雇主、项目链接或真实照片写入技能说明、README、示例数据或缩略图。
-- 技能包中的学校、公司、姓名、联系方式、项目和照片均为虚构示例。
-- 用户真实信息只应出现在用户明确要求生成的最终简历中，不应回写到技能包本身。
-
 ## 其他资源
 
 - `assets/resume-data-template.json`：匿名简历信息数据结构。
 - `assets/resume-template-editable.html`：紧凑的一页 HTML 示例。
 - `assets/resume-template-two-page.html`：双页 HTML 示例。
+- `assets/application-tracker.html`：空白秋招投递进度记录 HTML，可直接在浏览器中编辑和备份。
+- `assets/application-tracker-overview.svg`：秋招投递进度 HTML 的虚构示例预览图。
 - `assets/fictional-resume-photo.png`：虚构示例证件照。
 - `assets/template-overview.jpg`：18 个模板的缩略图总览。

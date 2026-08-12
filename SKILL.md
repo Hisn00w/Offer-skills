@@ -1,6 +1,6 @@
 ---
 name: Offer-skills
-description: Create privacy-safe editable Chinese resume HTML and PDF files from DOCX, pasted text, JSON, or an existing resume. Use for polished one-page or two-page layouts, flexible paper sizes, shared left alignment, blue section bands, photo replacement, browser editing, and print-to-PDF export.
+description: Create privacy-safe editable Chinese resume HTML and PDF files, or a browser-based job-application tracker, from DOCX, pasted text, JSON, screenshots, or an existing resume. Use for polished one-page or two-page layouts, flexible paper sizes, shared left alignment, blue section bands, photo replacement, browser editing, application status tracking, and print-to-PDF export.
 ---
 
 # Offer Skills
@@ -19,6 +19,8 @@ Create reusable Chinese resume HTML files with a restrained visual system, relia
 - Use `assets/resume-data-template.json` as the anonymous content schema.
 - Use `assets/resume-template-editable.html` for a compact one-page editable resume.
 - Use `assets/resume-template-two-page.html` for the two-page reference style with a first-page header and a continuation page.
+- Use `assets/application-tracker.html` as a blank, standalone HTML tracker for autumn-recruitment applications. It supports date, company, position, status, next step, notes, search, filtering, local browser storage, CSV/JSON backup, and print-to-PDF.
+- Read `references/email-monitoring.md` when the user wants browser-based email checking or a recurring daily progress check.
 - Use `assets/template-overview.jpg` to compare the 18 numbered reference styles.
 - Use the numbered HTML files under `assets/templates-html/` when the user asks for one of the 18 large-company minimalist styles. These are text-first HTML templates with inline CSS/JavaScript and one shared fictional photo asset; do not convert these resources back to DOCX or replace the text with screenshots.
 - If the user uploads a resume screenshot or reference image, treat it as a visual layout reference: inspect its columns, spacing, typography, color hierarchy, photo placement, and page flow, then recreate the layout as editable HTML. A reference image may be used instead of selecting a numbered built-in template.
@@ -82,6 +84,25 @@ Create reusable Chinese resume HTML files with a restrained visual system, relia
 - Inspect every page for shared left alignment, rule spacing, clipping, missing Chinese glyphs, image placement, intentional page breaks, and bottom-margin safety.
 - Confirm the expected page count and paper dimensions with PDF metadata. Use text extraction only as a secondary check.
 - Deliver the requested HTML and optional PDF, not Word files, scratch screenshots, extracted XML, or personal source files.
+
+## Track job applications
+
+- When the user asks to organize application progress, copy `assets/application-tracker.html` to the requested output location instead of building a new tracker from scratch.
+- When the user invokes this application-tracking capability, place the working HTML on the user's Desktop by default as `秋招投递进度.html` (resolve the actual Desktop path from the environment), and explicitly tell the user the saved path in the final response.
+- Start with the blank tracker. If the user provides email text, screenshots, or portal pages, extract only the visible date, company, position, current status, next step, and useful notes; do not copy application IDs or unrelated personal details unless explicitly requested.
+- Merge duplicate “application received” and “thank you for applying” messages for the same company and position. Preserve the latest confirmed status when later evidence is provided.
+- Use the source wording for statuses when it is clear, such as `简历已投递`, `投递成功`, `新投递`, `简历筛选中`, `评估中`, `测评中`, `待笔试`, `拒绝`, and `已结束`. If the evidence is ambiguous, use `待确认` only after adding it to the status options or ask the user to confirm.
+- Keep the tracker data in the generated output or the browser's local storage. Never write a user's real application history into this skill's bundled files, README, template examples, or ZIP package.
+- Tell the user that the tracker can be edited directly in a browser, filtered by status, backed up as JSON/CSV, and printed or saved as PDF.
+
+## Check email notifications
+
+- When the user provides an email provider and the login email address, read `references/email-monitoring.md` and use the browser-control skill to inspect the provider's web mailbox. The account address identifies the mailbox; it is not a password.
+- Ask the user to complete sign-in and any verification step in the selected browser when the mailbox is not already open. Do not request, store, or type passwords or verification codes on the user's behalf.
+- Search only the mailbox views and messages needed for application progress. Extract sender, subject, date, company, position, and the visible progress signal; ignore advertisements and unrelated mail.
+- Merge the result into the Desktop tracker, preserving the latest clearly confirmed status and adding the email date or source note when useful. Report which records were added or updated.
+- If the user asks for daily checking, use the Codex automation tool to create or update a recurring daily monitor. Prefer a heartbeat automation, reuse an existing matching automation, and ask for a preferred check time if none is given. Never write raw automation directives or expose schedule syntax in the user-facing response.
+- A scheduled run should open the named provider in the browser, check for new application-related messages since the previous run, update the Desktop tracker, and tell the user whether any progress changed. If sign-in is required, report that the user must sign in before the next check can continue.
 
 ## Targeted edits
 
